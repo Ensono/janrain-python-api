@@ -7,8 +7,13 @@ def get(auth_token, base_url, url):
     api_url = "%s/%s" % (base_url, url)
     print("Calling GET on %s" % api_url)
     get_response = requests.get(api_url, headers={'Authorization': 'Basic %s' % auth_token})
-    api_response = json.loads(get_response.text)
-    return api_response
+    if get_response.text != "":
+        api_response = json.loads(get_response.text)
+        return api_response
+    elif 200 <= get_response.status_code < 300:
+        return True
+    else:
+        return False
 
 
 # PUT
@@ -22,8 +27,13 @@ def put(auth_token, base_url, url, data_payload):
         },
         json=data_payload
     )
-    api_response = json.loads(put_response.text)
-    return api_response
+    if put_response.text != "":
+        api_response = json.loads(put_response.text)
+        return api_response
+    elif 200 <= put_response.status_code < 300:
+        return True
+    else:
+        return False
 
 
 # POST
@@ -40,7 +50,7 @@ def post(auth_token, base_url, url, data_payload):
     if post_response.text != "":
         api_response = json.loads(post_response.text)
         return api_response
-    elif post_response.status_code == 200:
+    elif 200 <= post_response.status_code < 300:
         return True
     else:
         return False
@@ -54,7 +64,7 @@ def delete(auth_token, base_url, url):
     if delete_response.text != "":
         api_response = json.loads(delete_response.text)
         return api_response
-    elif delete_response.status_code == 204:
+    elif 200 <= delete_response.status_code < 300:
         return True
     else:
         return False
