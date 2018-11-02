@@ -4,3 +4,4 @@ idna==2.7
 python-dotenv==0.9.1
 requests==2.20.0
 urllib3==1.24
+pydoc-markdown==2.0.4
