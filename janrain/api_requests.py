@@ -1,11 +1,12 @@
 import json
 import requests
+from janrain.output import output
 
 
 # GET
-def get(auth_token, base_url, url):
+def get(auth_token, base_url, verbose, url):
     api_url = "%s/%s" % (base_url, url)
-    print("Calling GET on %s" % api_url)
+    output(verbose, "Calling GET on %s" % api_url)
     get_response = requests.get(api_url, headers={'Authorization': 'Basic %s' % auth_token})
     if get_response.text != "":
         api_response = json.loads(get_response.text)
@@ -17,9 +18,9 @@ def get(auth_token, base_url, url):
 
 
 # PUT
-def put(auth_token, base_url, url, data_payload):
+def put(auth_token, base_url, verbose, url, data_payload):
     api_url = "%s/%s" % (base_url, url)
-    print("Calling PUT on %s" % api_url)
+    output(verbose, "Calling PUT on %s" % api_url)
     put_response = requests.put(api_url,
        headers={
         'Authorization': 'Basic %s' % auth_token,
@@ -37,9 +38,9 @@ def put(auth_token, base_url, url, data_payload):
 
 
 # POST
-def post(auth_token, base_url, url, data_payload):
+def post(auth_token, base_url, verbose, url, data_payload):
     api_url = "%s/%s" % (base_url, url)
-    print("Calling POST on %s" % api_url)
+    output(verbose, "Calling POST on %s" % api_url)
     post_response = requests.post(api_url,
        headers={
         'Authorization': 'Basic %s' % auth_token,
@@ -57,9 +58,9 @@ def post(auth_token, base_url, url, data_payload):
 
 
 # DELETE
-def delete(auth_token, base_url, url):
+def delete(auth_token, base_url, verbose, url):
     api_url = "%s/%s" % (base_url, url)
-    print("Calling DELETE on %s" % api_url)
+    output(verbose, "Calling DELETE on %s" % api_url)
     delete_response = requests.delete(api_url, headers={'Authorization': 'Basic %s' % auth_token})
     if delete_response.text != "":
         api_response = json.loads(delete_response.text)

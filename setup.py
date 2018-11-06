@@ -14,7 +14,8 @@ setuptools.setup(
     url="https://github.com/amido/janrain-python-api",
     packages=setuptools.find_packages(),
     install_requires=[
-        'requests'
+        'requests',
+        'termcolor'
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
