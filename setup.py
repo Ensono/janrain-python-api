@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="janrain-python-api",
-    version="0.0.3",
+    version="0.0.4",
     author="Lewis England",
     author_email="lewis.england@amido.com",
     description="A simple wrapper around Janrain's config API",

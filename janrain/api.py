@@ -2,6 +2,7 @@ import base64
 import janrain.clients
 import janrain.flows
 import janrain.schema
+import janrain.forms
 
 
 class Api(object):
@@ -146,6 +147,11 @@ class Api(object):
 
     def create_flow_form(self, flow_name, form_name, form_config):
         return janrain.flows.create_flow_form(self.auth_header, self.base_url, self.verbose, flow_name, form_name, form_config)
+
+    # FORMS
+    # Update form configuration
+    def update_form(self, flow_name, form_name, form_config):
+        return janrain.forms.update_form(self.auth_header, self.base_url, self.verbose, flow_name, form_name, form_config)
 
     # SCHEMAS
     # Lookup and configuration paths to the Janrain schemas
