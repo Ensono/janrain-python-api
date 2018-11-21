@@ -3,6 +3,7 @@ import janrain.clients
 import janrain.flows
 import janrain.schema
 import janrain.forms
+import janrain.entity_type
 
 
 class Api(object):
@@ -14,6 +15,7 @@ class Api(object):
         self.janrain_app_id = defaults['janrain_app']
         
         self.base_url = "https://v1.api.%s.janrain.com/config/%s" % (defaults['janrain_region'], defaults['janrain_app'])
+        self.capture_base_url = "https://%s.janraincapture.com/" % defaults['janrain_registration_realm']
 
         auth_string = "%s:%s" % (defaults['janrain_id'], defaults['janrain_secret'])
         self.auth_header = base64.b64encode(auth_string.encode("utf-8")).decode('utf-8')
@@ -107,6 +109,20 @@ class Api(object):
         """
         return janrain.clients.update_client_settings(self.auth_header, self.base_url, self.verbose, client_id, settings_config)
 
+    def update_client_setting(self, client_id, setting_key, setting_value):
+        """
+        Update a single setting for a client in Janrain
+
+        Args:
+          * `client_id`: The ID of the client to update
+          * `settings_key`: A string represents the key of a setting
+          * `settings_value`: A string represents the value of a setting
+
+        Returns:
+          * JSON Object: Status of the request
+        """
+        return janrain.clients.update_client_setting(self.auth_header, self.capture_base_url, self.verbose, client_id, setting_key, setting_value)
+
     # FLOWS
     # Lookup and configuration paths to the Janrain flows
     def get_flows(self):
@@ -161,8 +177,16 @@ class Api(object):
     def get_schema(self, schema_name):
         return janrain.schema.get_schema(self.auth_header, self.base_url, self.verbose, schema_name)
 
+    def get_attribute(self, schema_name, schema_element_name):
+        return janrain.schema.get_attribute(self.auth_header, self.base_url, self.verbose, schema_name, schema_element_name)
+
     def create_attribute(self, schema_name, schema_element_name, schema_element_config):
         return janrain.schema.create_attribute(self.auth_header, self.base_url, self.verbose, schema_name, schema_element_name, schema_element_config)
 
     def delete_attribute(self, schema_name, schema_element_name):
         return janrain.schema.delete_attribute(self.auth_header, self.base_url, self.verbose, schema_name, schema_element_name)
+
+    # Entity type
+    # Managing entity type schema in Janrain
+    def set_attribute_constraints(self, type_name, attribute_name, constraints):
+        return janrain.entity_type.set_attribute_constraints(self.auth_header, self.capture_base_url, self.verbose, type_name, attribute_name, constraints)

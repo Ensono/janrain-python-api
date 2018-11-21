@@ -14,6 +14,12 @@ def get_schema(auth_token, base_url, verbose, schema_name):
     )
     return schema_get_json
 
+def get_attribute(auth_token, base_url, verbose, schema_name, attribute_name):
+    attribute_json = api_requests.get(
+        auth_token, base_url, verbose, "schemas/%s/%s" % (schema_name, attribute_name)
+    )
+    return attribute_json
+
 
 def create_attribute(auth_token, base_url, verbose, schema_name, schema_element_name, schema_element_json):
     schema_create_attribute_json = api_requests.put(
