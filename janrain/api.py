@@ -188,5 +188,8 @@ class Api(object):
 
     # Entity type
     # Managing entity type schema in Janrain
+    def set_access_schema(self, type_name, for_client_id, access_type, attributes):
+        return janrain.entity_type.set_access_schema(self.auth_header, self.capture_base_url, self.verbose, type_name, for_client_id, access_type, attributes)
+
     def set_attribute_constraints(self, type_name, attribute_name, constraints):
         return janrain.entity_type.set_attribute_constraints(self.auth_header, self.capture_base_url, self.verbose, type_name, attribute_name, constraints)
