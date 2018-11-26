@@ -4,6 +4,7 @@ import janrain.flows
 import janrain.schema
 import janrain.forms
 import janrain.entity_type
+import janrain.templates
 
 
 class Api(object):
@@ -168,6 +169,11 @@ class Api(object):
     # Update form configuration
     def update_form(self, flow_name, form_name, form_config):
         return janrain.forms.update_form(self.auth_header, self.base_url, self.verbose, flow_name, form_name, form_config)
+
+    # TEMPLATES
+    # Update email template
+    def update_template(self, flow_name, flow_locale, template_name, template_body):
+        return janrain.templates.update_template(self.auth_header, self.base_url, self.verbose, flow_name, flow_locale, template_name, template_body)
 
     # SCHEMAS
     # Lookup and configuration paths to the Janrain schemas
