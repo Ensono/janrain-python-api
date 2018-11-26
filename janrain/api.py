@@ -15,7 +15,7 @@ class Api(object):
         self.janrain_app_id = defaults['janrain_app']
         
         self.base_url = "https://v1.api.%s.janrain.com/config/%s" % (defaults['janrain_region'], defaults['janrain_app'])
-        self.capture_base_url = "https://%s.janraincapture.com/" % defaults['janrain_registration_realm']
+        self.capture_base_url = "https://%s.janraincapture.com" % defaults['janrain_registration_realm']
 
         auth_string = "%s:%s" % (defaults['janrain_id'], defaults['janrain_secret'])
         self.auth_header = base64.b64encode(auth_string.encode("utf-8")).decode('utf-8')

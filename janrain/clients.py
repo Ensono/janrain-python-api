@@ -51,6 +51,6 @@ def update_client_settings(auth_token, base_url, verbose, client_id, settings_co
 
 def update_client_setting(auth_token, base_url, verbose, client_id, setting_key, setting_value):
     client_setting_update_json = api_requests.post(
-        auth_token, base_url, verbose, "setttings/set?for_client_id=%s&key=%s&value=%s" % (client_id, setting_key, setting_value), ""
+        auth_token, base_url, verbose, "settings/set?for_client_id=%s&key=%s&value=%s" % (client_id, setting_key, setting_value), ""
     )
     return client_setting_update_json
