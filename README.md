@@ -32,10 +32,11 @@ from janrain.api import Api
 
 
 defaults = {
-    'janrain_region': os.environ['JANRAIN_REGION'],
-    'janrain_app':    os.environ['JANRAIN_APP'],
-    'janrain_id':     os.environ['JANRAIN_CLIENT'],
-    'janrain_secret': os.environ['JANRAIN_SECRET']
+    'janrain_region':             os.environ['JANRAIN_REGION'],
+    'janrain_app':                os.environ['JANRAIN_APP'],
+    'janrain_id':                 os.environ['JANRAIN_CLIENT'],
+    'janrain_secret':             os.environ['JANRAIN_SECRET'],
+    'janrain_registration_realm': os.environ['registration_realm']
 }
 
 api = Api(defaults)

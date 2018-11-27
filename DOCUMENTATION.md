@@ -1,14 +1,11 @@
-<h1 id="janrain.api">janrain.api</h1>
+# janrain.api
 
-
-<h2 id="janrain.api.Api">Api</h2>
-
+## Api
 ```python
 Api(self, defaults={})
 ```
 
-<h3 id="janrain.api.Api.get_clients">get_clients</h3>
-
+### get_clients
 ```python
 Api.get_clients(self)
 ```
@@ -21,8 +18,7 @@ Args:
 Returns:
   * JSON Object: List of all information about all the clients
 
-<h3 id="janrain.api.Api.get_client">get_client</h3>
-
+### get_client
 ```python
 Api.get_client(self, client_id)
 ```
@@ -35,8 +31,7 @@ Args:
 Returns:
   * JSON Object: All the information about a single client
 
-<h3 id="janrain.api.Api.create_client">create_client</h3>
-
+### create_client
 ```python
 Api.create_client(self, client_config)
 ```
@@ -49,8 +44,7 @@ Args:
 Returns:
   * JSON Object: The properties that have been used to set up the new client
 
-<h3 id="janrain.api.Api.update_client">update_client</h3>
-
+### update_client
 ```python
 Api.update_client(self, client_id, client_config)
 ```
@@ -64,8 +58,7 @@ Args:
 Returns:
   * JSON Object: The updated properties in the affected client
 
-<h3 id="janrain.api.Api.delete_client">delete_client</h3>
-
+### delete_client
 ```python
 Api.delete_client(self, client_id)
 ```
@@ -78,8 +71,7 @@ Args:
 Returns:
   * Boolean: `True` if the client has been deleted, `False` if there was an error
 
-<h3 id="janrain.api.Api.get_client_settings">get_client_settings</h3>
-
+### get_client_settings
 ```python
 Api.get_client_settings(self, client_id)
 ```
@@ -93,8 +85,7 @@ Args:
 Returns:
   * JSON Object: List of all settings attributed to a client
 
-<h3 id="janrain.api.Api.update_client_settings">update_client_settings</h3>
-
+### update_client_settings
 ```python
 Api.update_client_settings(self, client_id, settings_config)
 ```
@@ -107,4 +98,35 @@ Args:
 
 Returns:
   * JSON Object: List of the updated settings in the affected client
+
+### update_client_setting
+```python
+Api.update_client_setting(self, client_id, setting_key, setting_value)
+```
+
+Update a single setting for a client in Janrain
+
+Args:
+  * `client_id`: The ID of the client to update
+  * `settings_key`: A string represents the key of a setting
+  * `settings_value`: A string represents the value of a setting
+
+Returns:
+  * JSON Object: Status of the request
+
+### update_flow_field
+```python
+Api.update_flow_field(self, flow_name, locale, field_name, field_config)
+```
+
+Update an existing field in a flow
+
+Args:
+  * `flow_name`: The ID of the client to delete
+  * `locale`: The locale code of the flow
+  * `field_name`: The name of the field to update
+  * `field_config`: A JSON block of configuration to update the field with
+
+Returns:
+  * Boolean: `True` if the flow has been updated, `False` if there was an error
 
