@@ -5,6 +5,7 @@ import janrain.schema
 import janrain.forms
 import janrain.entity_type
 import janrain.templates
+import janrain.translations
 
 
 class Api(object):
@@ -174,6 +175,19 @@ class Api(object):
     # Update email template
     def update_template(self, flow_name, flow_locale, template_name, template_body):
         return janrain.templates.update_template(self.auth_header, self.base_url, self.verbose, flow_name, flow_locale, template_name, template_body)
+
+    # TRANSLATIONS
+    # Get all translations for a flow
+    def get_translations(self, flow_name):
+        return janrain.translations.get_translations(self.auth_header, self.base_url, self.verbose, flow_name)
+
+    # Add a new translation
+    def add_translation(self, flow_name, translation):
+        return janrain.translations.update_translation(self.auth_header, self.base_url, self.verbose, flow_name, translation)
+
+    # Update an existing translation
+    def update_translation(self, flow_name, translation):
+        return janrain.translations.update_translation(self.auth_header, self.base_url, self.verbose, flow_name, translation)
 
     # SCHEMAS
     # Lookup and configuration paths to the Janrain schemas

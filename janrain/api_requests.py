@@ -69,3 +69,22 @@ def delete(auth_token, base_url, verbose, url):
         return True
     else:
         return False
+
+# PATCH
+def patch(auth_token, base_url, verbose, url, data_payload):
+    api_url = "%s/%s" % (base_url, url)
+    output(verbose, "Calling POST on %s" % api_url)
+    post_response = requests.patch(api_url,
+       headers={
+        'Authorization': 'Basic %s' % auth_token,
+        'Content-Type': 'application/json'
+        },
+        json=data_payload
+    )
+    if post_response.text != "":
+        api_response = json.loads(post_response.text)
+        return api_response
+    elif 200 <= post_response.status_code < 300:
+        return True
+    else:
+        return False
