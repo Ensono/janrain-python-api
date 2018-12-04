@@ -1,4 +1,5 @@
 import base64
+import janrain.application
 import janrain.clients
 import janrain.flows
 import janrain.schema
@@ -21,6 +22,68 @@ class Api(object):
 
         auth_string = "%s:%s" % (defaults['janrain_id'], defaults['janrain_secret'])
         self.auth_header = base64.b64encode(auth_string.encode("utf-8")).decode('utf-8')
+
+    # APPLICATION
+    # Manage application settings
+    def get_application_settings(self):
+        """
+        Get all application settings for a Janrain application
+
+        Args:
+          * None
+
+        Returns:
+          * JSON Object: List of all settings about a Janrain application
+        """
+        return janrain.application.get_settings(self.auth_header, self.base_url, self.verbose)
+
+    def update_application_settings(self, update_application_settings):
+        """
+        Update application settings to a Janrain application
+
+        Args:
+          * None
+
+        Returns:
+          * JSON Object: List of all settings about a Janrain application
+        """
+
+        application_settings_options = self.get_application_settings_options()
+        application_settings_options_dictionary = {}
+        for application_setting_option in application_settings_options:
+            application_settings_options_dictionary[application_setting_option['name']] = application_setting_option['group']
+
+        existing_application_settings = self.get_application_settings()
+
+        for update_application_setting_name in update_application_settings:
+            isCustom = False
+            if update_application_setting_name in application_settings_options_dictionary:
+                group = application_settings_options_dictionary[update_application_setting_name]
+                isCustom = 'Custom' == group
+            else:
+                isCustom = True
+
+            update_application_setting = update_application_settings[update_application_setting_name]
+
+            if isCustom:
+                existing_application_settings['custom'][update_application_setting_name] = update_application_setting
+            else:
+                existing_application_settings[update_application_setting_name] = update_application_setting
+
+        return janrain.application.update_settings(self.auth_header, self.base_url, self.verbose, existing_application_settings)
+
+    def get_application_settings_options(self):
+        """
+        Get all application settings options for a Janrain application
+
+        Args:
+          * None
+
+        Returns:
+          * JSON Object: List of all settings options for a Janrain application
+        """
+        return janrain.application.get_settings_options(self.auth_header, self.base_url, self.verbose)
+
 
     # CLIENTS
     # Lookup and configuration paths to the Janrain clients
